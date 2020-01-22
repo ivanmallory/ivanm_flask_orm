@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dojos & Ninjas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">Add a Dojo</h1>
+                <form action="/add_dojo" method="POST">
+                    <p>Name: <input class="form-control w-50" type="text" name="name"></p>
+                    <p>City: <input class="form-control w-50" type="text" name="city"></p>
+                    <p>State: <input class="form-control w-50" type="text" name="state"></p>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+            <div class="col">
+                <h1 class="text-center">Add a Ninja</h1>
+                <form action="/add_ninja" method="POST">
+                    <p>First Name: <input class="form-control w-50" type="text" name="first_name"></p>
+                    <p>Last Name: <input class="form-control w-50" type="text" name="last_name"></p>
+                    <p>Dojo:
+                        <select name="dojo">
+                            {% for dojo in all_dojos %}
+                            <option value="{{dojo.id}}">{{dojo['name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        </div>
+        <div class="row bg-primary text-white m-3">
+            <div class="col text-center">
+                <h1 class="text-center">All the Dojos</h1>
+                <ul class="text-center d-inline-block p-0">
+                    {% for dojo in all_dojos %}
+                    <li>
+                        <h5>Ninjas at the {{dojo['name']}}</h5>
+                        <ul>
+                            {% for ninja in dojo.ninjas %}
+                            <li><span>{{ninja['first_name']}} {{ninja['last_name']}}</span></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

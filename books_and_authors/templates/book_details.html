@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books & Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>{{book['title']}}</h1>
+                <p>ID: {{book['id']}}</p>
+                <p>Description: {{book['content']}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p>Authors:</p>
+                <ul>
+                    {% for author in book.books_authors %}
+                    <li>{{author['first_name']}} {{author['last_name']}}</li>
+                    {% endfor %}
+                </ul>
+                <form action="/authors_books" method="POST">
+                    <input type="hidden" name="book_id" value="{{book.id}}">
+                    <select name="author_id">
+                        {% for author in authors %}
+                        <option value="{{author.id}}">{{author['first_name']}} {{author['last_name']}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Add">
+                </form> 
+            </div>
+        </div>
+        <button class="btn bg-dark text-white"><a href="/">Add a Book</a></button>
+    </div>
+</body>
+</html>

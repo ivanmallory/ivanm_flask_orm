@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Books & Authors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container jumbotron">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Add a Author</h1>
+                <form class="form" action='/add_author' method="POST">
+                    <p>First Name: <input class="form-control w-50" type="text" name="first_name"></p>
+                    <p>Last Name: <input class="form-control w-50" type="text" name="last_name"></p>
+                    <p>Notes:<textarea class="form-control w-50" type="text" name="notes"></textarea></p>
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                        {% for author in authors %}
+                        <tr>
+                            <td>{{author['id']}}</td>
+                            <td>{{author['first_name']}} {{author['last_name']}}</td>
+                            <td><a href="/author_details/{{author.id}}">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
